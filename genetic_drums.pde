@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 
-String samplePath = "F:\\Users\\Aiden\\Documents\\Processing\\sketches\\genetic_drums\\genetic_drums\\data\\sample_packs_trimmed\\urban";
+String samplePath = "F:\\Users\\Aiden\\Documents\\Processing\\sketches\\genetic_drums\\genetic_drums\\data\\808_drum_kit";
 ArrayList<Sample> sampleList;
 ArrayList<Float> sampleLengths;
 
@@ -288,8 +288,16 @@ void keyPressed() {
   if (key == ' ')
     nextGeneration();
     
-  if (key == 's')
-    selectFolder("Select a folder to process:", "folderSelected");
+  if (key == 's') {
+    Element elementToSave = population[highlighted];
+    String[] genes = new String[numGenes];
+    for (int i = 0; i < numGenes; i++) {
+      genes[i] = elementToSave.DNA.get(i).getEncoding(); 
+    }
+
+    // Writes the strings to a file, each on a separate line
+    saveStrings(random(1) + ".txt", genes);
+  }
 }
 
 File selectedDirectory = null;
